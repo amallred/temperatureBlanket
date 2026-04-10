@@ -10,20 +10,25 @@
     
 <header class="header" id="header">
     <h1>Temperature Blanket Generator</h1>
-    <nav>More things</nav>
+    <nav class="nav" id="nav">
+        <ul class="nav--btns">
+            <li>Home</li>
+            <li>New blanket</li>
+            <li>Saved blanets</li>
+            </ul></nav>
 </header>
 <main class="main" id="main">
-    <div class="form--container">
-        <form action="" class="form">
-            <label for="zip">Zip code</label>
-            <input type="text" name="" id="zip" required />
-            <label for="start">Start date</label>
-            <input type="text" name="" id="start" required />
-            <label for="end">End date</label>
-            <input type="text" name="" id="end" required />
+    <div class="FormContainer">
+        <form action="" class="DataForm">
+            <label for="DataForm__zip">City name</label>
+            <input type="text" name="" id="city" required />
+            <label for="DataForm__start-date">Year</label>
+            <input type="text" name="" id="year" required />
+
             <!-- color selectors -->
-            <label for="colorTotal"></label>
-            <input type="text" name="" id="colorTotal" required />
+            <label for="DataForm__color-total"></label>
+            <input type="text" name="" id="color-total" required />
+                <!-- will need to work that information into a formula that auto generates the following -->
             <label for="color1">Color 1</label>
             <input type="color" name="" id="color1" required />
             <label for="color2">Color 2</label>
