@@ -21,17 +21,17 @@
 <main class="main" id="main">
     <div class="FormContainer">
         <form action="" id="DataForm">
-            <label for="DataForm__city">City name</label>
-            <input type="text" name="" id="city" required /><br>
+            <label for="DataForm__zipCode">Zip Code</label>
+            <input type="number" name="" id="zipCode" required /><br>
 
             <label for="DataForm__year">Year</label>
             <input type="text" name="" id="year" required /><br>
 
             <label for="DataForm__tempScale">Temperature Scale</label>
-            <input type="text" name="" id="tempScale" required /><br>
-            
-            <label for="DataForm__timeZone">Time Zone</label>
-            <input type="text" name="" id="timeZone" required /><br>
+            <select id="tempScale" name="" required>
+                <option value="fahrenheit">Fahrenheit</option>
+                <option value="Celsius">Celsius</option>
+            </select><br>
 
             <!-- color selectors -->
             <!-- <label for="DataForm__color-total"></label>
@@ -66,6 +66,6 @@
                 How to assign color for each row?-->
 </main>
 <footer class="footer" id="footer">Happy creating!</footer>
-<script src="index.js"></script>
+<script src="index.js" type="module"></script>
 </body>
 </html>

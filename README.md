@@ -6,6 +6,7 @@
 - Update form input to:
   - validate input type
   - default to F and EST
+- Insert variables into url for API call
 
 ### Acknowledgements & References
 - CSS Reset from [Josh Comeau](https://www.joshwcomeau.com/css/custom-css-reset/)
