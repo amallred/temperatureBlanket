@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles.css">
     <title>Temperature Blanket</title>
-    <script src="index.js"></script>
 </head>
 <body class="body" id="body">
     
@@ -23,9 +22,13 @@
     <div class="FormContainer">
         <form action="" id="DataForm">
             <label for="DataForm__city">City name</label>
-            <input type="text" name="" id="city" required />
+            <input type="text" name="" id="city" required /><br>
             <label for="DataForm__year">Year</label>
-            <input type="text" name="" id="year" required />
+            <input type="text" name="" id="year" required /><br>
+            <label for="DataForm__tempScale">Temperature Scale</label>
+            <input type="text" name="" id="tempScale" required /><br>
+            <label for="DataForm__timeZone">Time Zone</label>
+            <input type="text" name="" id="timeZone" required /><br>
 
             <!-- color selectors -->
             <!-- <label for="DataForm__color-total"></label>
@@ -50,11 +53,16 @@
             <input type="submit" value="Submit">
         </form>
     </div>
+    <div id="SearchResults">
+        <h2>Displaying results for</h2>
+        <p></p>
+    </div>
 
     <div class="preview"></div>
         <!-- Append children x# of rows with #row class
                 How to assign color for each row?-->
 </main>
 <footer class="footer" id="footer">Happy creating!</footer>
+<script src="index.js"></script>
 </body>
 </html>

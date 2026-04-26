@@ -1,16 +1,38 @@
-const form = document.querySelector('#DataForm')
+const form = document.getElementById('DataForm')
 
-// form.addEventListener('submit', (e) => {
-//     e.preventDefault()
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
 
-//     const formData = new FormData(form) // need to look again at what this does/how it works
+    const year = document.getElementById('year').value
+    const city = document.getElementById('city').value
+    const tempScale = document.getElementById('tempScale').value
+    const timeZone = document.getElementById('timeZone').value
 
-//     // const city = formData.get('city')
-//     // const year = formData.get('year')
+    console.log(year)
+    console.log(city)
+    console.log(tempScale)
+    console.log(timeZone)
+    
+    // || DISPLAY SEARCH PARAMETERS ||
+    const searchResults = document.getElementById('SearchResults')
+    
+    const searchYear = document.createElement('p')
+    const searchCity = document.createElement('p')
+    const searchTempScale = document.createElement('p')
+    const searchTimeZone = document.createElement('p')
 
-//     // const data = Object.fromEntries(formData.entries())
-//     console.log(formData)
-// })
+    searchYear.textContent = `Year: ${year}`
+    searchCity.textContent = `City: ${city}`
+    searchTempScale.textContent = `Temperature Scale: ${tempScale}`
+    searchTimeZone.textContent = `Time Zone: ${timeZone}`
+
+    searchResults.appendChild(searchYear)
+    searchResults.appendChild(searchCity)
+    searchResults.appendChild(searchTempScale)
+    searchResults.appendChild(searchTimeZone)
+
+
+})
 
 
 fetch('https://archive-api.open-meteo.com/v1/archive?latitude=35.222&longitude=-101.8313&start_date=2026-04-10&end_date=2026-04-24&hourly=temperature_2m&timezone=America%2FNew_York&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch')
