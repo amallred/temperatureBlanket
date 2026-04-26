@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles.css">
     <title>Temperature Blanket</title>
+    <script src="index.js"></script>
 </head>
 <body class="body" id="body">
     
@@ -17,19 +18,20 @@
             <li>Saved blanets</li>
             </ul></nav>
 </header>
+
 <main class="main" id="main">
     <div class="FormContainer">
-        <form action="" class="DataForm">
-            <label for="DataForm__zip">City name</label>
+        <form action="" id="DataForm">
+            <label for="DataForm__city">City name</label>
             <input type="text" name="" id="city" required />
-            <label for="DataForm__start-date">Year</label>
+            <label for="DataForm__year">Year</label>
             <input type="text" name="" id="year" required />
 
             <!-- color selectors -->
-            <label for="DataForm__color-total"></label>
-            <input type="text" name="" id="color-total" required />
+            <!-- <label for="DataForm__color-total"></label>
+            <input type="text" name="" id="color-total" required /> -->
                 <!-- will need to work that information into a formula that auto generates the following -->
-            <label for="color1">Color 1</label>
+            <!-- <label for="color1">Color 1</label>
             <input type="color" name="" id="color1" required />
             <label for="color2">Color 2</label>
             <input type="color" name="" id="color2" required />
@@ -44,7 +46,8 @@
             <label for="color7">Color 7</label>
             <input type="color" name="" id="color7" required />
             <label for="color8">Color 8</label>
-            <input type="color" name="" id="color8" required />
+            <input type="color" name="" id="color8" required /> -->
+            <input type="submit" value="Submit">
         </form>
     </div>
 
