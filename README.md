@@ -2,6 +2,11 @@
 - Create an app that visualizes a temperature blanket for a chosen span of time with a chosen amount of custom colors
 - Connect to a weather API
 
+## TO DO NEXT
+- Update form input to:
+  - validate input type
+  - default to F and EST
+
 ### Acknowledgements & References
 - CSS Reset from [Josh Comeau](https://www.joshwcomeau.com/css/custom-css-reset/)
 - [BEM structure](https://getbem.com/naming/)

@@ -1,17 +1,20 @@
 const form = document.getElementById('DataForm')
 
+const year = ''
+const city = ''
+const tempScale = ''
+
+// || COLLECT FORM INPUT AND UPDATE VARIABLES ||
 form.addEventListener('submit', (e) => {
     e.preventDefault()
 
     const year = document.getElementById('year').value
     const city = document.getElementById('city').value
     const tempScale = document.getElementById('tempScale').value
-    const timeZone = document.getElementById('timeZone').value
 
     console.log(year)
     console.log(city)
     console.log(tempScale)
-    console.log(timeZone)
     
     // || DISPLAY SEARCH PARAMETERS ||
     const searchResults = document.getElementById('SearchResults')
@@ -19,23 +22,17 @@ form.addEventListener('submit', (e) => {
     const searchYear = document.createElement('p')
     const searchCity = document.createElement('p')
     const searchTempScale = document.createElement('p')
-    const searchTimeZone = document.createElement('p')
 
     searchYear.textContent = `Year: ${year}`
     searchCity.textContent = `City: ${city}`
     searchTempScale.textContent = `Temperature Scale: ${tempScale}`
-    searchTimeZone.textContent = `Time Zone: ${timeZone}`
 
     searchResults.appendChild(searchYear)
     searchResults.appendChild(searchCity)
     searchResults.appendChild(searchTempScale)
-    searchResults.appendChild(searchTimeZone)
-
-
 })
 
-
-fetch('https://archive-api.open-meteo.com/v1/archive?latitude=35.222&longitude=-101.8313&start_date=2026-04-10&end_date=2026-04-24&hourly=temperature_2m&timezone=America%2FNew_York&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch')
+fetch('https://archive-api.open-meteo.com/v1/archive?latitude=35.222&longitude=-101.8313&start_date=2026-04-10&end_date=2026-04-24&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch')
     .then(res => res.json())
     .then(data => console.log(data))
     .catch(e => console.error(e))
