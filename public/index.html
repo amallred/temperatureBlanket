@@ -21,23 +21,29 @@
 <main class="main" id="main">
     <div class="FormContainer">
         <form action="" id="DataForm">
-            <label for="DataForm__zipCode">Zip Code</label>
-            <input type="number" name="" id="zipCode" required /><br>
+            <!-- <label for="DataForm__zipCode">Zip Code</label>
+            <input type="number" name="" id="zipCode" required /><br> -->
 
+            <label for="DataForm__city">City</label>
+            <input type="text" name="" id="city" required /><br>
+            
             <label for="DataForm__year">Year</label>
             <input type="text" name="" id="year" required /><br>
 
             <label for="DataForm__tempScale">Temperature Scale</label>
             <select id="tempScale" name="" required>
                 <option value="fahrenheit">Fahrenheit</option>
-                <option value="Celsius">Celsius</option>
+                <option value="celsius">Celsius</option>
             </select><br>
-
+            <input type="submit" value="Submit">
+        </form>
+<br><br>
+        <form action="" id="ColorForm">
             <!-- color selectors -->
             <!-- <label for="DataForm__color-total"></label>
             <input type="text" name="" id="color-total" required /> -->
                 <!-- will need to work that information into a formula that auto generates the following -->
-            <!-- <label for="color1">Color 1</label>
+            <label for="color1">Color 1</label>
             <input type="color" name="" id="color1" required />
             <label for="color2">Color 2</label>
             <input type="color" name="" id="color2" required />
@@ -52,20 +58,20 @@
             <label for="color7">Color 7</label>
             <input type="color" name="" id="color7" required />
             <label for="color8">Color 8</label>
-            <input type="color" name="" id="color8" required /> -->
-            <input type="submit" value="Submit">
+            <input type="color" name="" id="color8" required />
         </form>
     </div>
     <div id="SearchResults">
-        <h2>Displaying results for</h2>
-        <p></p>
     </div>
 
     <div class="preview"></div>
         <!-- Append children x# of rows with #row class
                 How to assign color for each row?-->
 </main>
+
 <footer class="footer" id="footer">Happy creating!</footer>
+
 <script src="index.js" type="module"></script>
+
 </body>
 </html>
