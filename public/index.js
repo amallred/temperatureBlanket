@@ -1,5 +1,6 @@
 const form = document.getElementById('DataForm')
 
+// || VARIABLES ||
 let year
 // let zipCode
 let city
@@ -64,7 +65,7 @@ export async function loadWeatherData (year, latitude, longitude, tempScale = "f
             method: "GET"
         })
         const data = await res.json()
-        console.log(data.daily.temperature_2m_max)
+        // console.log(data.daily.temperature_2m_max)
         
         // Find max/min of HIGH temps for the year
         let maxHighTemps = data.daily.temperature_2m_max
@@ -73,6 +74,60 @@ export async function loadWeatherData (year, latitude, longitude, tempScale = "f
         let minHighTemps = data.daily.temperature_2m_max
         minHighTemp = Math.min(...minHighTemps)
         
+        let dailyHighTemps = data.daily.temperature_2m_max
+        
+        
+        // || THIS IS WHERE YOU ARE WORKING. ||
+        //    YOU NEED TO FIGURE OUT HOW TO LOOP OVER EACH  DAY'S TEMP IN THE ARRAY AND 
+        //    SEE WHICH 'BUCKET' IT FALLS INTO. BUCKETS ARE CALCULATED BY FINDING THE
+        //    DIFFERENCE BETWEEN THE YEAR'S MAX HIGH AND LOW TEMPS AND DIVIDING (CURRENTLY) 
+        //    BY 8. THAT NUMBER WILL GET ADDED TO THE PREVIOUS TOTAL TO FIND THAT BUCKET'S
+        //    RANGE. 
+        
+        // maybe try mapping data based on where it would fall...
+        // or store the ranges in a list of dictionaries ... chatgpt suggestion
+        
+        let tempDifference = maxHighTemp - minHighTemp
+        let tempPercentage = Math.floor(tempDifference / 8) //Currently the number of colors you can select
+
+        // console.log(`Max High: ${maxHighTemp}\nMin High: ${minHighTemp}\nTemp difference: ${tempDifference}\n Temp percentage: ${tempPercentage}`)
+
+        let rangeZero = minHighTemp
+        let rangeOne = rangeZero + tempPercentage
+        let rangeTwo = rangeOne + tempPercentage
+        let rangeThree = rangeTwo + tempPercentage
+        let rangeFour = rangeThree + tempPercentage
+        let rangeFive = rangeFour + tempPercentage
+        let rangeSix = rangeFive + tempPercentage
+        let rangeSeven = rangeSix + tempPercentage
+        let rangeEight = maxHighTemp
+
+        const previewContainer = document.getElementById('preview')
+        const addColor = document.createElement('p')
+
+        // console.log(`Temperature ranges: ${rangeZero}, ${rangeOne}, ${rangeTwo}, ${rangeThree}, ${rangeFour}, ${rangeFive}, ${rangeSix}, ${rangeSeven}, ${rangeEight}`)
+
+        // SWITCH CASES?
+
+        for (const dailyTemp of dailyHighTemps) {
+            if ((dailyTemp >= rangeZero) && (dailyTemp < rangeOne)) {
+                console.log('Black')
+            } else if ((dailyTemp >= rangeOne) && (dailyTemp < rangeTwo)) {
+                console.log('Purple')
+            } else if ((dailyTemp >= rangeTwo) && (dailyTemp < rangeThree)) {
+                console.log('Blue')
+            } else if ((dailyTemp >= rangeThree) && (dailyTemp < rangeFour)) {
+                console.log('Green')
+            } else if ((dailyTemp >= rangeFour) && (dailyTemp < rangeFive)) {
+                console.log('Yellow')
+            } else if ((dailyTemp >= rangeFive) && (dailyTemp < rangeSix)) {
+                console.log('Orange')
+            } else if ((dailyTemp >= rangeSix) && (dailyTemp < rangeSeven)) {
+                console.log('Red')
+            } else if ((dailyTemp >= rangeSeven) && (dailyTemp <= rangeEight)) {
+                console.log('White')
+            }
+        }
         // Find max/min LOW temps for the year
         // let maxLowTemps = data.daily.temperature_2m_min
         // maxLowTemp = Math.max(...maxLowTemps)
@@ -85,23 +140,27 @@ export async function loadWeatherData (year, latitude, longitude, tempScale = "f
     }
 }
 
-// || CONVERT ZIP CODE TO COORDINATES ||
-    
+// || CONVERT CITY TO COORDINATES ||
+// Currently using only the top result from the city search.
+
 async function getCoordinates (city) {
     try {
         const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&language=en&format=json`)
-
+        
         // This link includes formatting to show the top 10 results
         // https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=10&language=en&format=json
-
+        
         const data = await res.json()
         
         latitude = data.results[0].latitude
         longitude = data.results[0].longitude
     } catch (e) {
-    console.error(e)
+        console.error(e)
     }
 }
+
+
+// || CONVERT ZIP CODE TO COORDINATES  > DOES NOT WORK WELL; API ISSUE, NOT CODE ISSUE. SEE README FOR MORE INFO ||
 // async function getCoordinates (zipCode) {
 //     try {
 //         const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${zipCode}&language=en&format=json`)
@@ -119,3 +178,5 @@ async function getCoordinates (city) {
 
 const colorForm = document.getElementById('ColorForm')
 
+// TESTING
+// loadWeatherData (2000, 35.222, -101.8313, tempScale = "fahrenheit")
