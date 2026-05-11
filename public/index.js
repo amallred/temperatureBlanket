@@ -16,10 +16,10 @@ let minLowTemp
 form.addEventListener('submit', async (e) => {
     e.preventDefault()
 
-    year = document.getElementById('year').value
-    city = document.getElementById('city').value
+    year = document.getElementById('DataForm__year').value
+    city = document.getElementById('DataForm__city').value
     // zipCode = document.getElementById('zipCode').value
-    tempScale = document.getElementById('tempScale').value
+    tempScale = document.getElementById('DataForm__tempScale').value
     
     // || DISPLAY SEARCH PARAMETERS ||
     const searchResults = document.getElementById('SearchResults')
@@ -67,6 +67,8 @@ export async function loadWeatherData (year, latitude, longitude, tempScale = "f
         const data = await res.json()
         // console.log(data.daily.temperature_2m_max)
         
+        console.log(data)
+
         // Find max/min of HIGH temps for the year
         let maxHighTemps = data.daily.temperature_2m_max
         maxHighTemp = Math.max(...maxHighTemps)
@@ -76,22 +78,22 @@ export async function loadWeatherData (year, latitude, longitude, tempScale = "f
         
         let dailyHighTemps = data.daily.temperature_2m_max
         
+        // -- SAVING FOR LATER ITERATIONS --
+        // Find max/min LOW temps for the year
+
+        // let maxLowTemps = data.daily.temperature_2m_min
+        // maxLowTemp = Math.max(...maxLowTemps)
         
-        // || THIS IS WHERE YOU ARE WORKING. ||
-        //    YOU NEED TO FIGURE OUT HOW TO LOOP OVER EACH  DAY'S TEMP IN THE ARRAY AND 
-        //    SEE WHICH 'BUCKET' IT FALLS INTO. BUCKETS ARE CALCULATED BY FINDING THE
-        //    DIFFERENCE BETWEEN THE YEAR'S MAX HIGH AND LOW TEMPS AND DIVIDING (CURRENTLY) 
-        //    BY 8. THAT NUMBER WILL GET ADDED TO THE PREVIOUS TOTAL TO FIND THAT BUCKET'S
-        //    RANGE. 
-        
-        // maybe try mapping data based on where it would fall...
-        // or store the ranges in a list of dictionaries ... chatgpt suggestion
+        // let minLowTemps = data.daily.temperature_2m_min
+        // minLowTemp = Math.min(...minLowTemps)
+
+        // -- END SAVE FOR LATER SECTION --
         
         let tempDifference = maxHighTemp - minHighTemp
         let tempPercentage = Math.floor(tempDifference / 8) //Currently the number of colors you can select
 
-        // console.log(`Max High: ${maxHighTemp}\nMin High: ${minHighTemp}\nTemp difference: ${tempDifference}\n Temp percentage: ${tempPercentage}`)
 
+        // COLOR RANGE VARIABLES
         let rangeZero = minHighTemp
         let rangeOne = rangeZero + tempPercentage
         let rangeTwo = rangeOne + tempPercentage
@@ -102,38 +104,55 @@ export async function loadWeatherData (year, latitude, longitude, tempScale = "f
         let rangeSeven = rangeSix + tempPercentage
         let rangeEight = maxHighTemp
 
-        const previewContainer = document.getElementById('preview')
-        const addColor = document.createElement('p')
+        // Retrieve svg
+        const previewImage = document.getElementById('blanketPreviewImage')
+        // // Create line element
+        // const addColor = document.createElement('line')
+        // // Style line element
+        // addColor.style.strokeWidth = 10;
+        // // Append line element to svg
+        // previewImage.appendChild(addColor)
 
-        // console.log(`Temperature ranges: ${rangeZero}, ${rangeOne}, ${rangeTwo}, ${rangeThree}, ${rangeFour}, ${rangeFive}, ${rangeSix}, ${rangeSeven}, ${rangeEight}`)
-
-        // SWITCH CASES?
-
-        for (const dailyTemp of dailyHighTemps) {
-            if ((dailyTemp >= rangeZero) && (dailyTemp < rangeOne)) {
-                console.log('Black')
-            } else if ((dailyTemp >= rangeOne) && (dailyTemp < rangeTwo)) {
-                console.log('Purple')
-            } else if ((dailyTemp >= rangeTwo) && (dailyTemp < rangeThree)) {
-                console.log('Blue')
-            } else if ((dailyTemp >= rangeThree) && (dailyTemp < rangeFour)) {
-                console.log('Green')
-            } else if ((dailyTemp >= rangeFour) && (dailyTemp < rangeFive)) {
-                console.log('Yellow')
-            } else if ((dailyTemp >= rangeFive) && (dailyTemp < rangeSix)) {
-                console.log('Orange')
-            } else if ((dailyTemp >= rangeSix) && (dailyTemp < rangeSeven)) {
-                console.log('Red')
-            } else if ((dailyTemp >= rangeSeven) && (dailyTemp <= rangeEight)) {
-                console.log('White')
-            }
-        }
-        // Find max/min LOW temps for the year
-        // let maxLowTemps = data.daily.temperature_2m_min
-        // maxLowTemp = Math.max(...maxLowTemps)
+        console.log(`The length of dailyHighTemps is ${dailyHighTemps.length}`)
         
-        // let minLowTemps = data.daily.temperature_2m_min
-        // minLowTemp = Math.min(...minLowTemps)
+        for (let i=0; i < dailyHighTemps.length; i++) {
+
+            const dailyTemp = dailyHighTemps[i]
+            
+            // Create line element
+            const addColor = document.createElementNS("http://www.w3.org/2000/svg", "line")
+
+            // Position line element
+            addColor.setAttribute("x1", 0)
+            addColor.setAttribute("x2", 3000)
+            addColor.setAttribute("y1", i * 2)
+            addColor.setAttribute("y2", i * 2)
+
+            // Style line element
+            addColor.setAttribute("stroke-width", 2)
+
+            
+            if ((dailyTemp >= rangeZero) && (dailyTemp < rangeOne)) {
+                addColor.setAttribute("stroke", "#6b5b5b")
+            } else if ((dailyTemp >= rangeOne) && (dailyTemp < rangeTwo)) {
+                addColor.setAttribute("stroke", "#440088")
+            } else if ((dailyTemp >= rangeTwo) && (dailyTemp < rangeThree)) {
+                addColor.setAttribute("stroke", "#0000ff")
+            } else if ((dailyTemp >= rangeThree) && (dailyTemp < rangeFour)) {
+                addColor.setAttribute("stroke", "#00ff00")
+            } else if ((dailyTemp >= rangeFour) && (dailyTemp < rangeFive)) {
+                addColor.setAttribute("stroke", "#ffff00")
+            } else if ((dailyTemp >= rangeFive) && (dailyTemp < rangeSix)) {
+                addColor.setAttribute("stroke", "#ff7700")
+            } else if ((dailyTemp >= rangeSix) && (dailyTemp < rangeSeven)) {
+                addColor.setAttribute("stroke","#ff0000")
+            } else if ((dailyTemp >= rangeSeven) && (dailyTemp <= rangeEight)) {
+                addColor.setAttribute("stroke","#d49595")
+            }
+
+            // Append line element to svg
+            previewImage.appendChild(addColor)
+        }
 
     } catch (error) {
         console.error('error', error.message)
