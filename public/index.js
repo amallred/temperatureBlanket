@@ -1,4 +1,5 @@
 const form = document.getElementById('DataForm')
+const colorForm = document.getElementById('ColorForm')
 
 // || VARIABLES ||
 let year
@@ -11,6 +12,15 @@ let maxHighTemp
 let maxLowTemp
 let minHighTemp
 let minLowTemp
+
+let color1
+let color2
+let color3
+let color4
+let color5
+let color6
+let color7
+let color8
 
 // || COLLECT FORM INPUT AND UPDATE VARIABLES ||
 form.addEventListener('submit', async (e) => {
@@ -33,6 +43,16 @@ form.addEventListener('submit', async (e) => {
     const searchMinHighTemp = document.createElement('p')
     // const searchMaxLowTemp = document.createElement('p')
     // const searchMinLowTemp = document.createElement('p')
+
+    // || GET COLOR CHOICES
+    color1 = document.getElementById('color1').value
+    color2 = document.getElementById('color2').value
+    color3 = document.getElementById('color3').value
+    color4 = document.getElementById('color4').value
+    color5 = document.getElementById('color5').value
+    color6 = document.getElementById('color6').value
+    color7 = document.getElementById('color7').value
+    color8 = document.getElementById('color8').value
 
     await getCoordinates(city)
     await loadWeatherData(year, latitude, longitude, tempScale)
@@ -59,7 +79,7 @@ form.addEventListener('submit', async (e) => {
         )
 })
 
-export async function loadWeatherData (year, latitude, longitude, tempScale = "fahrenheit") {
+async function loadWeatherData (year, latitude, longitude, tempScale = "fahrenheit") {
     try {
         const res = await fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=${year}-01-01&end_date=${year}-12-31&daily=temperature_2m_max,temperature_2m_min&temperature_unit=${tempScale}`, {
             method: "GET"
@@ -106,12 +126,6 @@ export async function loadWeatherData (year, latitude, longitude, tempScale = "f
 
         // Retrieve svg
         const previewImage = document.getElementById('blanketPreviewImage')
-        // // Create line element
-        // const addColor = document.createElement('line')
-        // // Style line element
-        // addColor.style.strokeWidth = 10;
-        // // Append line element to svg
-        // previewImage.appendChild(addColor)
 
         console.log(`The length of dailyHighTemps is ${dailyHighTemps.length}`)
         
@@ -133,21 +147,21 @@ export async function loadWeatherData (year, latitude, longitude, tempScale = "f
 
             
             if ((dailyTemp >= rangeZero) && (dailyTemp < rangeOne)) {
-                addColor.setAttribute("stroke", "#6b5b5b")
+                addColor.setAttribute("stroke", color1)
             } else if ((dailyTemp >= rangeOne) && (dailyTemp < rangeTwo)) {
-                addColor.setAttribute("stroke", "#440088")
+                addColor.setAttribute("stroke", color2)
             } else if ((dailyTemp >= rangeTwo) && (dailyTemp < rangeThree)) {
-                addColor.setAttribute("stroke", "#0000ff")
+                addColor.setAttribute("stroke", color3)
             } else if ((dailyTemp >= rangeThree) && (dailyTemp < rangeFour)) {
-                addColor.setAttribute("stroke", "#00ff00")
+                addColor.setAttribute("stroke", color4)
             } else if ((dailyTemp >= rangeFour) && (dailyTemp < rangeFive)) {
-                addColor.setAttribute("stroke", "#ffff00")
+                addColor.setAttribute("stroke", color5)
             } else if ((dailyTemp >= rangeFive) && (dailyTemp < rangeSix)) {
-                addColor.setAttribute("stroke", "#ff7700")
+                addColor.setAttribute("stroke", color6)
             } else if ((dailyTemp >= rangeSix) && (dailyTemp < rangeSeven)) {
-                addColor.setAttribute("stroke","#ff0000")
+                addColor.setAttribute("stroke", color7)
             } else if ((dailyTemp >= rangeSeven) && (dailyTemp <= rangeEight)) {
-                addColor.setAttribute("stroke","#d49595")
+                addColor.setAttribute("stroke", color8)
             }
 
             // Append line element to svg
@@ -194,8 +208,6 @@ async function getCoordinates (city) {
 // }
 
 // || COLOR SELECTION ||
-
-const colorForm = document.getElementById('ColorForm')
 
 // TESTING
 // loadWeatherData (2000, 35.222, -101.8313, tempScale = "fahrenheit")
