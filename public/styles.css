@@ -62,14 +62,55 @@ h1, h2, h3, h4, h5, h6 {
         "header"
         "main"
         "footer";
+    background-color: rgb(71, 67, 119);
+    color: white;
 }
 
 #header {
     grid-area: header;
+    display: grid;
+    justify-content: center;
+    margin: 1.5rem;
 }
 
 #main {
     grid-area: main;
+    display: grid;
+    justify-content: center;
+    margin: 2.5rem;
+}
+
+#DataForm {
+    display: grid;
+    justify-content: center;
+}
+
+#DataForm__data_inputs {
+    display: flex;
+    justify-content: space-around;
+}
+
+#DataForm__data_inputs label{
+    padding: .5rem;
+}
+
+#DataForm__color_inputs {
+    display: flex;
+    justify-content: center;
+}
+
+#DataForm__color_inputs label {
+    margin: 0 1rem;
+}
+/* 
+#SearchResults {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+} */
+
+#SearchResults h2 {
+    margin-bottom: 1rem;
 }
 
 #blanketPreviewImage{

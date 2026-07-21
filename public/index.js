@@ -35,6 +35,7 @@ form.addEventListener('submit', async (e) => {
     const searchResults = document.getElementById('SearchResults')
     
     const resultsHeader = document.createElement('h2')
+    // const lineBreak = document.createElement('br')
     const searchYear = document.createElement('p')
     const searchCity = document.createElement('p')
     // const searchZipCode = document.createElement('p')
@@ -68,12 +69,13 @@ form.addEventListener('submit', async (e) => {
     // searchMinLowTemp.textContent = `The min low temp is: ${minLowTemp}`
 
     searchResults.replaceChildren(
-        searchResults.appendChild(resultsHeader),
-        searchResults.appendChild(searchYear),
-        searchResults.appendChild(searchCity),
-        searchResults.appendChild(searchTempScale),
-        searchResults.appendChild(searchMaxHighTemp),
-        searchResults.appendChild(searchMinHighTemp)
+        resultsHeader,
+        // lineBreak,
+        searchYear,
+        searchCity,
+        searchTempScale,
+        searchMaxHighTemp,
+        searchMinHighTemp
         // searchResults.appendChild(searchMaxLowTemp),
         // searchResults.appendChild(searchMinLowTemp)
         )
